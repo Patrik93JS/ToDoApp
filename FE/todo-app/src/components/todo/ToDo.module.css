@@ -44,7 +44,7 @@ hover:bg-red-500 hover:text-black
 }
 
 .completeCheckbox {
-  @apply block relative  cursor-pointer left-20;
+  @apply relative  cursor-pointer left-20;
 }
 
 .toDoDeleteModalContainer {

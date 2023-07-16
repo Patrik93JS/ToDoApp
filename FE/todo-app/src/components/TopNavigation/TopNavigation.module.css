@@ -80,7 +80,7 @@
   @apply right-0 top-16 fixed
   flex justify-end items-center 
   h-1/4
-  z-0
+  z-50
   bg-myPrimary
   flex-col
   text-green-500;
