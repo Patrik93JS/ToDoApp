@@ -45,7 +45,8 @@
 
 .topNavigationIconDisabled {
   @apply relative flex items-center justify-center 
-    h-10 w-8  mb-0 mx-auto
+    h-10 w-12   mb-0 mx-auto
+
     bg-myPrimary text-green-800;
 }
 

@@ -42,7 +42,9 @@ export const TopNavigation: FC = () => {
       {idGroup ? (
         <TopNavigationIcon icon={<BsFileEarmarkPlusFill size="28" />} text="Add New ToDo" onClick={openToDoForm} />
       ) : (
-        <BsFileEarmarkPlusFill size="28" className={styles.topNavigationIconDisabled} />
+        <div className={styles.topNavigationIconDisabled}>
+          <BsFileEarmarkPlusFill size="28" />
+        </div>
       )}
       <TopNavigationIcon icon={<BsCheckLg size="28" />} text="Completed" onClick={handleClickComplete} />
       <TopNavigationIcon icon={<BsCollection size="28" />} text="All" onClick={handleClickAll} />
