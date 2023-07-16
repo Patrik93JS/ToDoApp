@@ -33,7 +33,7 @@ export const SideBarGroup: FC<Props> = ({ title, idGroup }) => {
         <span className={`${styles.sidebarTooltip} group-hover:scale-100`}>{title}</span>
       </button>
       {isSelected && (
-        <button className="absolute pt-2 pl-5 duration-900" onClick={open}>
+        <button className="absolute pt-2 pl-9 duration-900 ml-1" onClick={open}>
           <MdDelete size={24} color="red" />
         </button>
       )}

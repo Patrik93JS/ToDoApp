@@ -18,9 +18,12 @@
 }
 
 .container {
-  @apply fixed top-0 left-0
-   h-screen w-16 mt-0 flex flex-col
-   bg-myPrimary text-white shadow-lg;
+  @apply fixed top-0 left-0 grid
+  h-full w-28 mt-0 flex-col
+  overflow-x-clip
+  bg-myPrimary text-white shadow-lg;
+
+  overflow-y: auto;
 }
 
 .groupSelected {
