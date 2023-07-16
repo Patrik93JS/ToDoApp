@@ -9,11 +9,9 @@ export const useFilteredToDos = () => {
   const { filter, searchValue } = useAppSelector(({ filter }) => filter);
 
   const handleSearch = useCallback(() => {
-    const filteredData = data?.data.filter(
-      (item) => item.attributes.to_do_group.data?.id === idGroup && item.attributes.title.includes(searchValue)
-    );
+    const filteredData = data?.data.filter((item) => item.attributes.title.includes(searchValue));
     return filteredData;
-  }, [data?.data, idGroup, searchValue]);
+  }, [data?.data, searchValue]);
 
   const handleComplete = useCallback(() => {
     const completeData = data?.data.filter((item) => item.attributes.to_do_group.data?.id === idGroup && item.attributes.completed);
