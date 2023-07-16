@@ -32,6 +32,7 @@ export const TopNavigation: FC = () => {
   const handleChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value;
     dispatch(setFilter("search"));
+    dispatch(setIdGroup(null));
     dispatch(setSearchValue(searchValue));
   };
 
