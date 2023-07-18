@@ -32,7 +32,8 @@
       "inversedBy": "to_dos"
     },
     "longDescription": {
-      "type": "richtext"
+      "type": "richtext",
+      "maxLength": 1200
     }
   }
 }

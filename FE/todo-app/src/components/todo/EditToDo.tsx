@@ -7,15 +7,17 @@ import { UpdateToDoRequest, to_do } from "@/types/ToDo";
 import { useUpdateToDoMutation } from "@/store/api/todoApi";
 import { Button } from "../formComponents/Button";
 import { cn } from "@/lib/utils";
+import { Error } from "../formComponents/Error";
 
 type Props = {
   todo: to_do;
+  close: () => void;
 };
 
-export const EditToDo: FC<Props> = ({ todo }) => {
+export const EditToDo: FC<Props> = ({ todo, close }) => {
   const [value, setValue] = useState("");
   const [edit, setEdit] = useState(false);
-  const [update] = useUpdateToDoMutation();
+  const [update, { isError }] = useUpdateToDoMutation();
   const editButton = cn(styles.editButton);
   const buttons = cn("pt-5 flex justify-center");
 
@@ -28,6 +30,9 @@ export const EditToDo: FC<Props> = ({ todo }) => {
   };
 
   const handleSave = () => {
+    if (isError) {
+      return;
+    }
     const updateData: UpdateToDoRequest = {
       id: todo.id,
       title: todo.attributes.title,
@@ -39,6 +44,7 @@ export const EditToDo: FC<Props> = ({ todo }) => {
     };
     update(updateData);
     setEdit(false);
+    close();
   };
 
   return (
@@ -55,6 +61,7 @@ export const EditToDo: FC<Props> = ({ todo }) => {
           )}
           {edit && <Button onClick={handleSave}>Save</Button>}
         </div>
+        {isError && <Error errorMsg="Rich text cannot be longer then 1200 charts" />}
       </div>
     </>
   );
