@@ -23,7 +23,7 @@ export const CreateGroupForm: FC<Props> = ({ open, closeModal }) => {
     defaultValues: { title: "" },
   });
 
-  const [createGroup] = useCreateGroupMutation();
+  const [createGroup, { isError }] = useCreateGroupMutation();
 
   const onSubmit = async (data: CreateGroupToDoType) => {
     const dataInput = {
@@ -32,7 +32,7 @@ export const CreateGroupForm: FC<Props> = ({ open, closeModal }) => {
         to_dos: [],
       },
     };
-    createGroup(dataInput);
+    await Promise.all([createGroup(dataInput).unwrap()]);
 
     closeModal();
   };
@@ -54,6 +54,7 @@ export const CreateGroupForm: FC<Props> = ({ open, closeModal }) => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <Input type="text" name="title" description="Write a name of group" placeholder="name" />
                   <Error errorMsg={formState.errors.title?.message} />
+                  {isError && <Error errorMsg="Maximum length is 10" />}
                   <Button buttonType="submitType">Create</Button>
                 </form>
               </FormProvider>

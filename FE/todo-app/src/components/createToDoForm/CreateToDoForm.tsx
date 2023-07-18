@@ -35,10 +35,13 @@ export const CreateToDoForm: FC<Props> = ({ open, closeModal }) => {
 
   const { handleSubmit, formState } = methods;
 
-  const [createToDo] = useCreateToDoMutation();
+  const [createToDo, { isError }] = useCreateToDoMutation();
   const { idGroup } = useAppSelector(({ idGroupToDo }) => idGroupToDo);
 
   const onSubmit = async (data: CreateToDoType) => {
+    if (isError) {
+      return;
+    }
     const dataForm = {
       data: {
         title: data.title,
@@ -49,6 +52,7 @@ export const CreateToDoForm: FC<Props> = ({ open, closeModal }) => {
         to_do_group: idGroup,
       },
     };
+
     createToDo(dataForm);
     closeModal();
   };

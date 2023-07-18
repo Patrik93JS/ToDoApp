@@ -27,8 +27,8 @@
 }
 
 .container {
-  @apply fixed top-0 left-0 grid
-  h-full w-28 mt-0 flex-col
+  @apply fixed top-0 left-0 flex
+  h-full w-28 mt-0  flex-col
   overflow-x-clip
   bg-myPrimary text-white shadow-lg;
 
