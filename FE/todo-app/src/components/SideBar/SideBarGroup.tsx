@@ -27,7 +27,7 @@ export const SideBarGroup: FC<Props> = ({ title, idGroup }) => {
   const isSelected = selectedGroupId === idGroup;
 
   return !isOpen ? (
-    <div className="relative">
+    <div>
       <button className={`${isSelected ? styles.groupSelected : styles.sidebar} group`} onClick={handleClick}>
         {titleLetter}
         {!isSelected ? (
@@ -37,7 +37,7 @@ export const SideBarGroup: FC<Props> = ({ title, idGroup }) => {
         )}
       </button>
       {isSelected && (
-        <button className="absolute top-1/3 transform -translate-y-1/3 right-1 pt-2 duration-900" onClick={open}>
+        <button className="absolute right-1  duration-900" onClick={open}>
           <MdDelete size={24} color="red" />
         </button>
       )}
