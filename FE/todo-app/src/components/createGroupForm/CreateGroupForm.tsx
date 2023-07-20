@@ -32,9 +32,11 @@ export const CreateGroupForm: FC<Props> = ({ open, closeModal }) => {
         to_dos: [],
       },
     };
-    await Promise.all([createGroup(dataInput).unwrap()]);
-    methods.setValue("title", "");
-    closeModal();
+    const dataGroup = await createGroup(dataInput).unwrap();
+    if (dataGroup) {
+      methods.setValue("title", "");
+      closeModal();
+    }
   };
 
   const { handleSubmit, formState } = methods;
