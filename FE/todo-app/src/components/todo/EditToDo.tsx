@@ -17,7 +17,7 @@ type Props = {
 export const EditToDo: FC<Props> = ({ todo, close }) => {
   const [value, setValue] = useState("");
   const [edit, setEdit] = useState(false);
-  const [update, { isError }] = useUpdateToDoMutation();
+  const [update, { isError, isSuccess }] = useUpdateToDoMutation();
   const editButton = cn(styles.editButton);
   const buttons = cn("pt-5 flex justify-center");
 
@@ -44,7 +44,7 @@ export const EditToDo: FC<Props> = ({ todo, close }) => {
     };
     update(updateData);
     setEdit(false);
-    close();
+    isSuccess && close();
   };
 
   return (
