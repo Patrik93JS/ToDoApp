@@ -33,7 +33,7 @@ export const CreateGroupForm: FC<Props> = ({ open, closeModal }) => {
       },
     };
     await Promise.all([createGroup(dataInput).unwrap()]);
-
+    methods.setValue("title", "");
     closeModal();
   };
 
