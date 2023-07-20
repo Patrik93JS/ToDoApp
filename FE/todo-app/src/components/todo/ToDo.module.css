@@ -75,3 +75,10 @@ hover:bg-black hover:text-white
     transition-all duration-300 ease-linear
     cursor-pointer shadow-lg;
 }
+
+.checkboxStyle {
+  @apply relative appearance-none 
+  shrink-0 w-4 h-4 border-2 border-blue-200 rounded-sm mt-1 
+  focus:ring-offset-0 focus:ring-1 bg-white
+   focus:ring-blue-100 checked:bg-green-500 checked:border-0;
+}

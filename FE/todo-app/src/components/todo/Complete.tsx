@@ -11,9 +11,7 @@ type Props = {
 };
 
 export const Complete: FC<Props> = ({ todo }) => {
-  const checkboxStyle = cn(
-    "peer relative appearance-none shrink-0 w-4 h-4 border-2 border-blue-200 rounded-sm mt-1 bg-whitefocus:outline-none focus:ring-offset-0 focus:ring-1 focus:ring-blue-100 checked:bg-green-500 checked:border-0 disabled:border-steel-400 disabled:bg-steel-400"
-  );
+  const checkboxStyle = cn(styles.checkboxStyle);
   const dispatch = useAppDispatch();
   const checked = useAppSelector((state) => state.todoComplete.todoComplete[todo.id] || false);
 
