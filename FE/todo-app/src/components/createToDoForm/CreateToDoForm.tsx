@@ -53,7 +53,11 @@ export const CreateToDoForm: FC<Props> = ({ open, closeModal }) => {
       },
     };
 
-    createToDo(dataForm);
+    await Promise.all([createToDo(dataForm).unwrap()]);
+    methods.setValue("title", "");
+    methods.setValue("description", "");
+    methods.setValue("mustBeCompleted", "");
+
     closeModal();
   };
 
