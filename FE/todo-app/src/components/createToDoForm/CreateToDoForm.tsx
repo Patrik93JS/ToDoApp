@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import styles from "./CreateToDoForm.module.css";
 import { createPortal } from "react-dom";
@@ -23,6 +23,7 @@ export type CreateToDoType = {
 };
 
 export const CreateToDoForm: FC<Props> = ({ open, closeModal }) => {
+  const [dataError, setDataError] = useState(false);
   const methods = useForm<CreateToDoType>({
     defaultValues: {
       title: "",
@@ -54,12 +55,15 @@ export const CreateToDoForm: FC<Props> = ({ open, closeModal }) => {
     };
 
     const dataToDo = await createToDo(dataForm).unwrap();
-    if (dataToDo) {
+
+    if (dataToDo.data) {
       methods.setValue("title", "");
       methods.setValue("description", "");
       methods.setValue("mustBeCompleted", "");
-
+      setDataError(false);
       closeModal();
+    } else {
+      setDataError(true);
     }
   };
 
@@ -84,6 +88,7 @@ export const CreateToDoForm: FC<Props> = ({ open, closeModal }) => {
 
                   <Input name="mustBeCompleted" description="When ToDo have to be done?" type="datetime-local" />
                   <Error errorMsg={formState.errors.mustBeCompleted?.message} />
+                  {dataError && <Error errorMsg="There is a problem with data" />}
 
                   <Button buttonType="submitType">Create</Button>
                 </form>

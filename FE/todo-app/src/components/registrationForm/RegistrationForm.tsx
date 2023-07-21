@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import styles from "./RegistrationForm.module.css";
 import { FormProvider, useForm } from "react-hook-form";
 import { useRegisterMutation } from "@/store/api/authenticationApi";
@@ -16,15 +16,23 @@ export type RegistrationFormType = {
 };
 
 export const RegistrationForm = () => {
+  const [dataError, setDataError] = useState(false);
   const methods = useForm<RegistrationFormType>({
     defaultValues: { username: "", email: "", password: "" },
   });
   const router = useRouter();
   const [registration] = useRegisterMutation();
 
-  const onSubmit = (data: RegistrationFormType) => {
-    registration(data);
-    router.push("/");
+  const onSubmit = async (data: RegistrationFormType) => {
+    try {
+      const registrationData = await registration(data).unwrap();
+      if (registrationData) {
+        setDataError(false);
+        router.push("/");
+      }
+    } catch (error) {
+      setDataError(true);
+    }
   };
 
   const { handleSubmit, formState } = methods;
@@ -59,6 +67,7 @@ export const RegistrationForm = () => {
               validationMessage="At least one big letter and one number"
             />
             <Error errorMsg={formState.errors.password?.message} />
+            {dataError && <Error errorMsg="There is a problem with data" />}
 
             <Button buttonType="submitType">Registration</Button>
           </form>

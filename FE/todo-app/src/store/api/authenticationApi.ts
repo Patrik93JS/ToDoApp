@@ -9,7 +9,7 @@ export const authenticationApi = appApi.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: [{ type: "Group" }],
+      invalidatesTags: [{ type: "Group" }, { type: "ToDo" }],
     }),
     register: builder.mutation<RegisterResponse, RegisterRequest>({
       query: ({ ...body }) => ({
@@ -17,7 +17,7 @@ export const authenticationApi = appApi.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: [{ type: "Group" }],
+      invalidatesTags: [{ type: "Group" }, { type: "ToDo" }],
     }),
     me: builder.query<MeResponse, void>({
       query: () => ({

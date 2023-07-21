@@ -1,4 +1,5 @@
 import { ApiResponse, ApiRequest } from "./Api";
+import { UsersPermissionsUser } from "./Group";
 
 export type createdBy = {
   data: {
@@ -37,7 +38,9 @@ export type to_do_group = {
   id: number;
   attributes: {
     title: string;
-    users_permissions_user: any;
+    users_permissions_user: {
+      data: UsersPermissionsUser;
+    };
     to_dos: {
       data: to_do[];
     };

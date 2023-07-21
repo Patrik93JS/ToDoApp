@@ -12,7 +12,7 @@ export const groupApi = appApi.injectEndpoints({
     }),
     createGroup: builder.mutation<CreateGroupToDoResponse, CreateGroupToDoRequest>({
       query: ({ ...body }) => ({
-        url: "api/to-do-groups",
+        url: "api/to-do-groups?populate=deep,3",
         method: "POST",
         body,
       }),
