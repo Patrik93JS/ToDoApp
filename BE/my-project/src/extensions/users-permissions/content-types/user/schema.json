@@ -69,7 +69,7 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::to-do-group.to-do-group",
-      "mappedBy": "users_permissions_user"
+      "mappedBy": "owner"
     }
   }
 }

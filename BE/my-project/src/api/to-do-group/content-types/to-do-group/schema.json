@@ -16,17 +16,17 @@
       "type": "string",
       "maxLength": 10
     },
-    "users_permissions_user": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "to_do_groups"
-    },
     "to_dos": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::to-do.to-do",
       "mappedBy": "to_do_group"
+    },
+    "owner": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "to_do_groups"
     }
   }
 }
