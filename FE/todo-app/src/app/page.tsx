@@ -1,19 +1,30 @@
 "use client";
 import { ToDo } from "../components/todo/ToDo";
 import styles from "./page.module.css";
-import { useModal } from "@/hooks/useModal";
 import { useFilteredToDos } from "../hooks/useFilterToDo";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAppSelector } from "@/store/hooks";
 
 export default function Home() {
-  const { isOpen, open, close } = useModal();
   const { filteredTodos } = useFilteredToDos();
+  const token = useAppSelector((state) => state.token);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (token) {
+      return;
+    } else {
+      router.push("/login");
+    }
+  }, [router, token]);
 
   return (
     <>
       <main>
         <div className={styles.toDoContainer}>
           {filteredTodos?.map((todo) => {
-            return <ToDo todo={todo} key={todo.id} isOpen={isOpen} open={open} close={close} />;
+            return <ToDo todo={todo} key={todo.id} />;
           })}
         </div>
       </main>

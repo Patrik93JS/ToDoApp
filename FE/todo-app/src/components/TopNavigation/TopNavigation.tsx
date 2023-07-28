@@ -25,8 +25,8 @@ export const TopNavigation: FC = () => {
   };
 
   const handleClickAll = () => {
-    dispatch(setFilter("all"));
     dispatch(setIdGroup(null));
+    dispatch(setFilter("all"));
   };
 
   const handleChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
