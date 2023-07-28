@@ -1,5 +1,9 @@
 import React, { FC, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { parseISO, isValid, isAfter } from "date-fns";
+
 import styles from "./CreateToDoForm.module.css";
 import { createPortal } from "react-dom";
 import { useCreateToDoMutation } from "@/store/api/todoApi";
@@ -24,6 +28,22 @@ export type CreateToDoType = {
 
 export const CreateToDoForm: FC<Props> = ({ open, closeModal }) => {
   const [dataError, setDataError] = useState(false);
+
+  const schema = yup.object().shape({
+    title: yup.string().required("Title is required"),
+    description: yup.string().required("Description is required"),
+    longDescription: yup.string().required("Long description is required"),
+    mustBeCompleted: yup
+      .string()
+      .required("Must be completed date is required")
+      .test("isFutureDate", "The date must be in the future", (value) => {
+        const currentDate = new Date();
+        const selectedDate = parseISO(value);
+        return !isValid(selectedDate) || isAfter(selectedDate, currentDate);
+      }),
+    completed: yup.boolean().required(),
+  });
+
   const methods = useForm<CreateToDoType>({
     defaultValues: {
       title: "",
@@ -32,6 +52,7 @@ export const CreateToDoForm: FC<Props> = ({ open, closeModal }) => {
       mustBeCompleted: "",
       completed: false,
     },
+    resolver: yupResolver(schema),
   });
 
   const { handleSubmit, formState } = methods;
@@ -40,9 +61,6 @@ export const CreateToDoForm: FC<Props> = ({ open, closeModal }) => {
   const { idGroup } = useAppSelector(({ idGroupToDo }) => idGroupToDo);
 
   const onSubmit = async (data: CreateToDoType) => {
-    if (isError) {
-      return;
-    }
     const dataForm = {
       data: {
         title: data.title,
@@ -59,6 +77,7 @@ export const CreateToDoForm: FC<Props> = ({ open, closeModal }) => {
     if (dataToDo.data) {
       methods.setValue("title", "");
       methods.setValue("description", "");
+      methods.setValue("longDescription", "");
       methods.setValue("mustBeCompleted", "");
       setDataError(false);
       closeModal();
@@ -85,6 +104,9 @@ export const CreateToDoForm: FC<Props> = ({ open, closeModal }) => {
 
                   <Input name="description" description="Describe ToDo" placeholder="Description" type="text" />
                   <Error errorMsg={formState.errors.description?.message} />
+
+                  <Input name="longDescription" description="Long Description" placeholder="Long Description" type="text" />
+                  <Error errorMsg={formState.errors.longDescription?.message} />
 
                   <Input name="mustBeCompleted" description="When ToDo have to be done?" type="datetime-local" />
                   <Error errorMsg={formState.errors.mustBeCompleted?.message} />
