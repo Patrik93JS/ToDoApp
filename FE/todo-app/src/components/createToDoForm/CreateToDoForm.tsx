@@ -88,6 +88,7 @@ export const CreateToDoForm: FC<Props> = ({ open, closeModal }) => {
 
                   <Input name="mustBeCompleted" description="When ToDo have to be done?" type="datetime-local" />
                   <Error errorMsg={formState.errors.mustBeCompleted?.message} />
+                  {isError && <Error errorMsg="Maximum length is 10" />}
                   {dataError && <Error errorMsg="There is a problem with data" />}
 
                   <Button buttonType="submitType">Create</Button>
