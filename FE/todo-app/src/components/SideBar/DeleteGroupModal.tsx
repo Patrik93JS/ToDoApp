@@ -5,7 +5,7 @@ import { useDeleteGroupMutation, useGetGroupsQuery } from "@/store/api/groupToDo
 import { Button } from "../formComponents/Button";
 import { setIdGroup } from "@/store/slices/idGroupToDo";
 import styles from "./SideBar.module.css";
-import { useDeleteToDoMutation } from "@/store/api/todoApi";
+import { useDeleteToDoMutation, useGetToDosQuery } from "@/store/api/todoApi";
 import { useMeQuery } from "@/store/api/authenticationApi";
 
 type Props = {
@@ -17,12 +17,17 @@ export const DeleteGroupModal: FC<Props> = ({ close, title }) => {
   const [deleteGroup, { isSuccess }] = useDeleteGroupMutation();
   const [deleteToDo] = useDeleteToDoMutation();
   const { data: meData } = useMeQuery();
+  const { data } = useGetToDosQuery(); // TODO si musim vytahnout odsud bych tak rekl, v tom vypada ze to je vse spravne
   // const { data } = useGetGroupsQuery({
   //   userId: parseInt((meData?.id ?? 0) as string),
   // });
 
   const dispatch = useAppDispatch();
   const selectedGroupId = useAppSelector(({ idGroupToDo }) => idGroupToDo.idGroup);
+  console.log(
+    "toDos",
+    meData?.to_do_groups.map((e) => e.to_dos.map((f) => f.id))
+  );
 
   const handleDeleteGroup = async () => {
     // if (!data) {
@@ -40,7 +45,6 @@ export const DeleteGroupModal: FC<Props> = ({ close, title }) => {
     await Promise.all(toDos?.map((todo) => deleteToDo(todo).unwrap()));
     await deleteGroup(selectedGroupId);
     dispatch(setIdGroup(null));
-    console.log("isSucess", isSuccess);
     isSuccess && close();
   };
 

@@ -43,7 +43,6 @@ export const CreateGroupForm: FC<Props> = ({ open, closeModal }) => {
       userId: parseInt(meData.id),
     };
 
-    console.log("data", dataInput);
     const dataGroup = await createGroup(dataInput).unwrap();
     if (dataGroup) {
       methods.setValue("title", "");
