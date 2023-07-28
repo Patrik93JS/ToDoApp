@@ -5,7 +5,7 @@ import { stringify } from "qs";
 
 export const groupApi = appApi.injectEndpoints({
   endpoints: (builder) => ({
-    getGroups: builder.query<GetGroupResponse, { userId: number }>({
+    getGroups: builder.query<GetGroupResponse, { userId: number | undefined }>({
       query: ({ userId }) => {
         const query = stringify(
           {

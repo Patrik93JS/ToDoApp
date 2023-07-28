@@ -7,7 +7,7 @@ import { useGetToDosQuery } from "@/store/api/todoApi";
 
 export const useFilteredToDos = () => {
   const { idGroup } = useAppSelector(({ idGroupToDo }) => idGroupToDo);
-  const { data } = useGetToDosQuery({ todoGroupId: idGroup as number }, { skip: !idGroup }); //TODO dostavam jen todo dle idGroup - spatne
+  const { data } = useGetToDosQuery({ todoGroupId: undefined });
   const { filter, searchValue } = useAppSelector(({ filter }) => filter);
 
   const handleSearch = useCallback(() => {
