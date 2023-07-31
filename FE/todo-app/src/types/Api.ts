@@ -1,7 +1,6 @@
 export type ApiResponse<T = void> = {
   data: T;
   message: string;
-  statusCode: number;
 };
 
 export type ApiRequest<T = void> = {

@@ -17,7 +17,7 @@ export const DeleteToDo: FC<Props> = ({ todo }) => {
   const toDoButtonDelete = cn(styles.toDoDeleteButton);
   return !isOpen ? (
     <Button className={toDoButtonDelete} onClick={open}>
-      <MdDelete />
+      <MdDelete size="20" />
     </Button>
   ) : (
     createPortal(<DeleteModal close={close} title={todo.attributes.title} todo={todo} />, document.body)

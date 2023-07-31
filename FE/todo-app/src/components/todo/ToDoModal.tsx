@@ -26,7 +26,7 @@ export const ToDoModal: FC<Props> = ({ close, todo }) => {
           <Description>{todo.attributes.title}</Description>
           <Description>{todo.attributes.description}</Description>
           <div className="break-all" dangerouslySetInnerHTML={{ __html: todo.attributes.longDescription }}></div>
-          <EditToDo todo={todo} />
+          <EditToDo todo={todo} close={close} />
         </div>
       </div>
     </div>

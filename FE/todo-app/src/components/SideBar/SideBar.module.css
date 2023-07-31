@@ -1,5 +1,5 @@
 .sidebar {
-  @apply static flex items-center justify-center 
+  @apply relative flex items-center justify-center 
     h-12 w-12 mt-14 mb-0 mx-auto  
   bg-gray-800 hover:bg-green-600 
   text-green-500 hover:text-white
@@ -9,18 +9,30 @@
     z-10;
 }
 
-.sidebarTooltip {
-  @apply absolute w-auto p-2 m-2 min-w-max  left-14 rounded-md shadow-md
+.sidebarTooltipSelected {
+  @apply absolute  mb-16 
+  rounded-md shadow-md
     text-white bg-gray-900 
     text-xs font-bold 
-    transition-all duration-300 scale-0 origin-left
-    z-20;
+    transition-all duration-300 scale-0 
+    z-50;
+}
+
+.sidebarTooltip {
+  @apply absolute bottom-full left-1/2 transform -translate-x-1/2 py-2 px-4 rounded-md shadow-md
+    text-white bg-gray-900 
+    text-xs font-bold 
+    transition-all duration-300 scale-0 origin-bottom
+    z-50;
 }
 
 .container {
-  @apply fixed top-0 left-0
-   h-screen w-16 mt-0 flex flex-col
-   bg-myPrimary text-white shadow-lg;
+  @apply fixed top-0 left-0 flex
+  h-full w-28 mt-0  flex-col
+  overflow-x-clip
+  bg-myPrimary text-white shadow-lg;
+
+  overflow-y: auto;
 }
 
 .groupSelected {

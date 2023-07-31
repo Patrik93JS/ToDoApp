@@ -4,12 +4,14 @@ import { useUpdateToDoMutation } from "@/store/api/todoApi";
 import { UpdateToDoRequest, to_do } from "@/types/ToDo";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setComplete } from "@/store/slices/todoCompleteSlice";
+import { cn } from "@/lib/utils";
 
 type Props = {
   todo: to_do;
 };
 
 export const Complete: FC<Props> = ({ todo }) => {
+  const checkboxStyle = cn(styles.checkboxStyle);
   const dispatch = useAppDispatch();
   const checked = useAppSelector((state) => state.todoComplete.todoComplete[todo.id] || false);
 
@@ -36,7 +38,7 @@ export const Complete: FC<Props> = ({ todo }) => {
 
   return (
     <div className={styles.completeCheckbox}>
-      <input type="checkbox" onChange={handleChange} checked={todo.attributes.completed} />
+      <input type="checkbox" onChange={handleChange} checked={todo.attributes.completed} className={checkboxStyle} />
     </div>
   );
 };

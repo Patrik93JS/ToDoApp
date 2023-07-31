@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import styles from "./LoginForm.module.css";
 import { FormProvider, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
@@ -17,6 +17,7 @@ export type LoginFormType = {
 };
 
 export const LoginForm = () => {
+  const [dataError, setDataError] = useState(false);
   const methods = useForm<LoginFormType>({
     defaultValues: { identifier: "", password: "" },
   });
@@ -26,7 +27,12 @@ export const LoginForm = () => {
 
   const onSubmit = async (data: LoginFormType) => {
     const [loginData] = await Promise.all([login(data).unwrap(), router.prefetch("/")]);
-    if (loginData) router.push("/");
+    if (loginData) {
+      setDataError(false);
+      router.push("/");
+    } else {
+      setDataError(true);
+    }
   };
 
   const { handleSubmit, formState } = methods;
@@ -48,6 +54,7 @@ export const LoginForm = () => {
 
             <Button buttonType="submitType">Login</Button>
             {isError && <Error errorMsg="wrong username or password" />}
+            {dataError && <Error errorMsg="There is a problem with data" />}
 
             <InfoBox>Not account yet? Let&lsquo;s create one</InfoBox>
           </form>

@@ -25,13 +25,14 @@ export const TopNavigation: FC = () => {
   };
 
   const handleClickAll = () => {
-    dispatch(setFilter("all"));
     dispatch(setIdGroup(null));
+    dispatch(setFilter("all"));
   };
 
   const handleChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value;
     dispatch(setFilter("search"));
+    dispatch(setIdGroup(null));
     dispatch(setSearchValue(searchValue));
   };
 
@@ -42,14 +43,16 @@ export const TopNavigation: FC = () => {
       {idGroup ? (
         <TopNavigationIcon icon={<BsFileEarmarkPlusFill size="28" />} text="Add New ToDo" onClick={openToDoForm} />
       ) : (
-        <BsFileEarmarkPlusFill size="28" className={styles.topNavigationIconDisabled} />
+        <div className={styles.topNavigationIconDisabled}>
+          <BsFileEarmarkPlusFill size="28" />
+        </div>
       )}
       <TopNavigationIcon icon={<BsCheckLg size="28" />} text="Completed" onClick={handleClickComplete} />
       <TopNavigationIcon icon={<BsCollection size="28" />} text="All" onClick={handleClickAll} />
       <TopNavigationSearch onChange={handleChangeSearch} />
       <TopNavigationUserCircle />
-      <CreateGroupForm open={isOpen} closeModal={close} />
-      <CreateToDoForm open={isToDoFormOpen} closeModal={closeToDoForm} />
+      {isOpen && <CreateGroupForm closeModal={close} />}
+      {isToDoFormOpen && <CreateToDoForm closeModal={closeToDoForm} />}
     </div>
   );
 };

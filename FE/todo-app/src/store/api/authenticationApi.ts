@@ -1,5 +1,6 @@
-import { appApi } from "../api/index";
 import { LoginRequest, LoginResponse, MeResponse, RegisterRequest, RegisterResponse } from "../../types/Auth";
+
+import { appApi } from "../api/index";
 
 export const authenticationApi = appApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -9,7 +10,7 @@ export const authenticationApi = appApi.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: [{ type: "Group" }],
+      invalidatesTags: [{ type: "Group" }, { type: "ToDo" }],
     }),
     register: builder.mutation<RegisterResponse, RegisterRequest>({
       query: ({ ...body }) => ({
@@ -17,13 +18,14 @@ export const authenticationApi = appApi.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: [{ type: "Group" }],
+      invalidatesTags: [{ type: "Group" }, { type: "ToDo" }],
     }),
     me: builder.query<MeResponse, void>({
       query: () => ({
-        url: "api/users/me",
+        url: "api/users/me?populate=deep,3",
         method: "GET",
       }),
+      providesTags: (result) => (result ? [{ type: "Me" }] : []),
     }),
   }),
 });

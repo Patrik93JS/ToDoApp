@@ -8,15 +8,14 @@ import { ToDoModal } from "./ToDoModal";
 import { Complete } from "./Complete";
 import { to_do } from "@/types/ToDo";
 import { DeleteToDo } from "./DeleteToDo";
+import { useModal } from "@/hooks/useModal";
 
 type Props = {
   todo: to_do;
-  isOpen: boolean;
-  open: () => void;
-  close: () => void;
 };
 
-export const ToDo: FC<Props> = ({ todo, isOpen, open, close }) => {
+export const ToDo: FC<Props> = ({ todo }) => {
+  const { isOpen, open, close } = useModal();
   const container = cn(styles.toDoContainer);
   const content = cn(styles.toDoContent);
   const toDoButtonModal = cn(styles.toDoButtonModal);

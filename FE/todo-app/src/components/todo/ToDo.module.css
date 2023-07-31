@@ -25,8 +25,8 @@ hover:bg-black hover:text-white
 
 .toDoDeleteButton {
   @apply p-2 mt-3 
-  bg-white text-black 
-hover:bg-red-500 hover:text-black
+  bg-black text-red-500 
+  hover:bg-green-500
   hover:rounded-sm rounded-lg
   transition-all duration-300 ease-linear
   hover:rotate-12
@@ -44,7 +44,7 @@ hover:bg-red-500 hover:text-black
 }
 
 .completeCheckbox {
-  @apply block relative  cursor-pointer left-20;
+  @apply relative  cursor-pointer left-20;
 }
 
 .toDoDeleteModalContainer {
@@ -74,4 +74,11 @@ hover:bg-red-500 hover:text-black
     hover:rounded-md rounded-xl 
     transition-all duration-300 ease-linear
     cursor-pointer shadow-lg;
+}
+
+.checkboxStyle {
+  @apply relative appearance-none 
+  shrink-0 w-4 h-4 border-2 border-blue-200 rounded-sm mt-1 
+  focus:ring-offset-0 focus:ring-1 bg-white
+   focus:ring-blue-100 checked:bg-green-500 checked:border-0;
 }
