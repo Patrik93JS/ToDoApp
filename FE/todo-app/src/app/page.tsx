@@ -12,9 +12,7 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    if (token) {
-      return;
-    } else {
+    if (!token) {
       router.push("/login");
     }
   }, [router, token]);

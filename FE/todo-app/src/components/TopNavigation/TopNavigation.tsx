@@ -51,8 +51,8 @@ export const TopNavigation: FC = () => {
       <TopNavigationIcon icon={<BsCollection size="28" />} text="All" onClick={handleClickAll} />
       <TopNavigationSearch onChange={handleChangeSearch} />
       <TopNavigationUserCircle />
-      <CreateGroupForm open={isOpen} closeModal={close} />
-      <CreateToDoForm open={isToDoFormOpen} closeModal={closeToDoForm} />
+      {isOpen && <CreateGroupForm closeModal={close} />}
+      {isToDoFormOpen && <CreateToDoForm closeModal={closeToDoForm} />}
     </div>
   );
 };

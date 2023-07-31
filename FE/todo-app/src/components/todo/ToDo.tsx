@@ -35,6 +35,6 @@ export const ToDo: FC<Props> = ({ todo }) => {
       </div>
     </div>
   ) : (
-    createPortal(<ToDoModal key={todo.id} close={close} todo={todo} />, document.body)
+    createPortal(<ToDoModal close={close} todo={todo} />, document.body)
   );
 };
