@@ -18,6 +18,7 @@ export const TopNavigationUserCircle: FC = () => {
   const logout = useCallback(async () => {
     dispatch(tokenSlice.actions.reset());
     dispatch(appApi.util.resetApiState());
+
     await router.push("/login");
   }, [dispatch, router]);
 

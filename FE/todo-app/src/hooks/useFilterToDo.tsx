@@ -2,12 +2,17 @@
 
 import { useCallback, useMemo } from "react";
 import { useAppSelector } from "@/store/hooks";
-import { useGetToDosQuery } from "@/store/api/todoApi";
+import { useGetAllToDosQuery, useGetToDosQuery } from "@/store/api/todoApi";
+import { useMeQuery } from "@/store/api/authenticationApi";
 
 export const useFilteredToDos = () => {
   const { idGroup } = useAppSelector(({ idGroupToDo }) => idGroupToDo);
-  const { data } = useGetToDosQuery({ todoGroupId: undefined });
+  const { data } = useGetToDosQuery({ todoGroupId: idGroup }, { skip: !idGroup });
+  const { data: meData } = useMeQuery();
   const { filter, searchValue } = useAppSelector(({ filter }) => filter);
+
+  const meIdGroups = meData?.to_do_groups.map((group) => group.id);
+  const { data: allData } = useGetAllToDosQuery({ todoGroupId: meIdGroups });
 
   const handleSearch = useCallback(() => {
     const filteredData = data?.data.filter((item) => item.attributes.title.includes(searchValue));
@@ -32,11 +37,11 @@ export const useFilteredToDos = () => {
     } else if (filter === "search") {
       return handleSearch();
     } else if (filter === "all") {
-      return data?.data;
+      return allData?.data;
     } else {
       return handleIdGroup();
     }
-  }, [filter, handleComplete, handleSearch, data?.data, handleIdGroup]);
+  }, [filter, handleComplete, handleSearch, allData?.data, handleIdGroup]);
 
   return { filteredTodos };
 };
