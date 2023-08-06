@@ -7,25 +7,25 @@ import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/store/hooks";
 
 export default function Home() {
-  const { filteredTodos } = useFilteredToDos();
-  const token = useAppSelector((state) => state.token);
-  const router = useRouter();
+	const { filteredTodos } = useFilteredToDos();
+	const token = useAppSelector((state) => state.token);
+	const router = useRouter();
 
-  useEffect(() => {
-    if (!token) {
-      router.push("/login");
-    }
-  }, [router, token]);
+	useEffect(() => {
+		if (!token) {
+			router.push("/login");
+		}
+	}, [router, token]);
 
-  return (
-    <>
-      <main>
-        <div className={styles.toDoContainer}>
-          {filteredTodos?.map((todo) => {
-            return <ToDo todo={todo} key={todo.id} />;
-          })}
-        </div>
-      </main>
-    </>
-  );
+	return (
+		<>
+			<main>
+				<div className={styles.toDoContainer}>
+					{filteredTodos?.map((todo) => {
+						return <ToDo todo={todo} key={todo.id} />;
+					})}
+				</div>
+			</main>
+		</>
+	);
 }
