@@ -63,7 +63,7 @@ resource "qovery_application" "strapi_app" {
   git_repository = {
     url       = "https://github.com/Patrik93JS/ToDoApp.git"
     branch    = "main"
-    root_path = "BE/my-project"
+    root_path = "/BE/my-project"
   }
   build_mode            = "DOCKER"
   dockerfile_path       = "Dockerfile"
