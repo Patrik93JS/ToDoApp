@@ -61,7 +61,7 @@ resource "qovery_application" "strapi_app" {
   cpu            = 1000
   memory         = 512
   git_repository = {
-    url       = "https://github.com/Patrik93JS/ToDoApp"
+    url       = "https://github.com/Patrik93JS/ToDoApp.git"
     branch    = "main"
     root_path = "BE/my-project"
   }
