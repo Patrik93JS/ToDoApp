@@ -7,18 +7,18 @@ terraform {
 }
 
 provider "qovery" {
-  token = var.qovery_access_token
+  token = "qov_3oSOjCUESe1AEvqSsRXTKp6f5neVWis8tbzVDGGZ01V63xyUf6BfneJ_302625401"
 }
 
 resource "qovery_aws_credentials" "my_aws_creds" {
-  organization_id   = var.qovery_organization_id
+  organization_id   = "64eb4aad-fb7c-4aad-8be7-f0c1d2a0792d"
   name              = "My AWS Creds"
-  access_key_id     = var.aws_access_key_id
-  secret_access_key = var.aws_secret_access_key
+  access_key_id     = "AKIAV6UVWTYP7TMGOIPI"
+  secret_access_key = "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"
 }
 
 resource "qovery_cluster" "my_cluster" {
-  organization_id   = var.qovery_organization_id
+  organization_id   = "64eb4aad-fb7c-4aad-8be7-f0c1d2a0792d"
   credentials_id    = qovery_aws_credentials.my_aws_creds.id
   name              = "Demo cluster"
   description       = "Terraform demo cluster"
@@ -30,7 +30,7 @@ resource "qovery_cluster" "my_cluster" {
 }
 
 resource "qovery_project" "my_project" {
-  organization_id = var.qovery_organization_id
+  organization_id = "64eb4aad-fb7c-4aad-8be7-f0c1d2a0792d"
   name            = "Strapi V4"
 
   depends_on = [
@@ -72,11 +72,40 @@ resource "qovery_application" "strapi_app" {
   ports                 = [
     {
       internal_port       = 1338
+      is_default = true
       external_port       = 443
       protocol            = "HTTP"
       publicly_accessible = true
     }
   ]
+  healthchecks = {
+    readiness_probe = {
+      type = {
+        http = {
+          port = 1338
+        }
+      }
+      initial_delay_seconds = 30
+      period_seconds        = 10
+      timeout_seconds       = 10
+      success_threshold     = 1
+      failure_threshold     = 3
+    }
+
+
+    liveness_probe = {
+      type = {
+        http = {
+          port = 1338
+        }
+      }
+      initial_delay_seconds = 30
+      period_seconds        = 10
+      timeout_seconds       = 10
+      success_threshold     = 1
+      failure_threshold     = 3
+    }
+  }
   environment_variables = [
     {
       key   = "PORT"
