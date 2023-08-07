@@ -13,4 +13,4 @@ WORKDIR /opt/app
 COPY ./ .
 RUN npm run build
 EXPOSE 1338
-CMD ["npm", "develop"]
+CMD ["npm","run", "develop"]
