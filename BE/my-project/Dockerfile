@@ -5,12 +5,12 @@ ARG NODE_ENV=development
 ENV NODE_ENV=${NODE_ENV}
 WORKDIR /opt/
 COPY ./package.json ./
-COPY ./yarn.lock ./
+COPY ./package-lock.json ./
 ENV PATH /opt/node_modules/.bin:$PATH
-RUN yarn config set network-timeout 600000 -g
-RUN yarn install
+RUN npm config set network-timeout 600000 -g
+RUN npm install
 WORKDIR /opt/app
 COPY ./ .
-RUN yarn build
+RUN npm build
 EXPOSE 1338
-CMD ["yarn", "develop"]
+CMD ["npm", "develop"]
