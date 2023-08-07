@@ -11,6 +11,6 @@ RUN npm config set network-timeout 600000 -g
 RUN npm install
 WORKDIR /opt/app
 COPY ./ .
-RUN npm build
+RUN npm run build
 EXPOSE 1338
 CMD ["npm", "develop"]
