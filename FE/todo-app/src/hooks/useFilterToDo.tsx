@@ -15,9 +15,9 @@ export const useFilteredToDos = () => {
   const { data: allData } = useGetAllToDosQuery({ todoGroupId: meIdGroups });
 
   const handleSearch = useCallback(() => {
-    const filteredData = data?.data.filter((item) => item.attributes.title.includes(searchValue));
+    const filteredData = allData?.data.filter((item) => item.attributes.title.includes(searchValue));
     return filteredData;
-  }, [data?.data, searchValue]);
+  }, [allData?.data, searchValue]);
 
   const handleComplete = useCallback(() => {
     const completeData = data?.data.filter((item) => item.attributes.to_do_group.data?.id === idGroup && item.attributes.completed);
