@@ -1,10 +1,13 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import {
+  createApi,
+  fetchBaseQuery,
+} from "@reduxjs/toolkit/query/react";
 import { AppState } from "../store";
 
 export const appApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://p1338-zfdc23b91-z23ff5a2f-gtw.zb07046ae.criom.sh/",
+    baseUrl: "https://todo-app-ludvik-cc644353413f.herokuapp.com/",
     prepareHeaders: (headers, { getState }) => {
       const { token } = getState() as AppState;
       if (token) headers.set("Authorization", `Bearer ${token}`);
