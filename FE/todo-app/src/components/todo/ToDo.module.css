@@ -63,7 +63,7 @@ hover:bg-black hover:text-white
 
 .editToDo {
   @apply w-full flex justify-center flex-col
-  p-5 h-auto;
+  lg:p-5 h-auto;
 }
 
 .editButton {

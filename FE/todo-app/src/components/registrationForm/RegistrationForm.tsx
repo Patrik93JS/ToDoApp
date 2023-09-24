@@ -39,10 +39,12 @@ export const RegistrationForm = () => {
 
   return (
     <div className={styles.registrationFormContainer}>
-      <div className="bg-gray-800 w-1/4 ">
+      <div className="bg-gray-800 ">
         <div className="flex justify-end w-100 p-3"></div>
         <div className="border-b  mx-10">
-          <div className="flex justify-center px-4 py-2">Make your registration</div>
+          <div className="flex justify-center px-4 py-2">
+            Make your registration
+          </div>
         </div>
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -56,7 +58,12 @@ export const RegistrationForm = () => {
             />
             <Error errorMsg={formState.errors.username?.message} />
 
-            <Input type="text" name="email" description="Email" placeholder="Email" />
+            <Input
+              type="text"
+              name="email"
+              description="Email"
+              placeholder="Email"
+            />
 
             <Input
               type="password"
@@ -67,7 +74,9 @@ export const RegistrationForm = () => {
               validationMessage="At least one big letter and one number"
             />
             <Error errorMsg={formState.errors.password?.message} />
-            {dataError && <Error errorMsg="There is a problem with data" />}
+            {dataError && (
+              <Error errorMsg="There is a problem with data" />
+            )}
 
             <Button buttonType="submitType">Registration</Button>
           </form>

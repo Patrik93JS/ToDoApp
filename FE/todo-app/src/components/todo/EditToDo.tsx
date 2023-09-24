@@ -47,7 +47,13 @@ export const EditToDo: FC<Props> = ({ todo, close }) => {
   return (
     <div className={styles.editToDo}>
       <div>
-        <textarea className="bg-black" rows={10} cols={55} readOnly={!edit} onChange={handleChange}></textarea>
+        <textarea
+          className="bg-black w-2/3 lg:w-1/2 md:w-2/3"
+          rows={10}
+          cols={55}
+          readOnly={!edit}
+          onChange={handleChange}
+        ></textarea>
       </div>
       <div className={buttons}>
         {!edit && (
@@ -57,7 +63,9 @@ export const EditToDo: FC<Props> = ({ todo, close }) => {
         )}
         {edit && <Button onClick={handleSave}>Save</Button>}
       </div>
-      {isError && <Error errorMsg="Rich text cannot be longer then 1200 charts" />}
+      {isError && (
+        <Error errorMsg="Rich text cannot be longer then 1200 charts" />
+      )}
     </div>
   );
 };
