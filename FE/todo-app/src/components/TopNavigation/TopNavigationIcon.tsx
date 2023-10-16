@@ -7,13 +7,19 @@ type Props = {
   onClick?: () => void;
 };
 
-export const TopNavigationIcon: FC<Props> = ({ onClick, icon, text }) => (
+export const TopNavigationIcon: FC<Props> = ({
+  onClick,
+  icon,
+  text,
+}) => (
   <button
     className={`${styles.topNavigationIconAction} group`}
     onClick={onClick}
   >
     {icon}
-    <span className={`${styles.topNavigationTooltip} group-hover:scale-100`}>
+    <span
+      className={`${styles.topNavigationTooltip} group-hover:scale-100`}
+    >
       {text}
     </span>
   </button>
