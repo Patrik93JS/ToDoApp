@@ -55,7 +55,7 @@ export type to_do_group = {
 export type CreateToDoRequest = ApiRequest<{
   title: string;
   description: string;
-  longDescription: string;
+  longDescription: string | undefined;
   mustBeCompleted: string;
   completed: boolean;
   to_do_group: number | null;

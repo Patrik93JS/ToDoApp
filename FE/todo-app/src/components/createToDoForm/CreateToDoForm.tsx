@@ -19,7 +19,7 @@ type Props = {
 export type CreateToDoType = {
   title: string;
   description: string;
-  longDescription: string;
+  longDescription: string | undefined;
   mustBeCompleted: string;
   completed: boolean;
 };
@@ -31,9 +31,7 @@ export const CreateToDoForm: FC<Props> = ({ closeModal }) => {
   const schema = yup.object().shape({
     title: yup.string().required("Title is required"),
     description: yup.string().required("Description is required"),
-    longDescription: yup
-      .string()
-      .required("Long description is required"),
+    longDescription: yup.string(),
     mustBeCompleted: yup
       .string()
       .required("Must be completed date is required")
