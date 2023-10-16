@@ -69,7 +69,7 @@ export const TopNavigation: FC = () => {
         handleMediaQueryChange
       );
     };
-  });
+  }, []);
 
   return (
     <div className={styles.topNavigation}>

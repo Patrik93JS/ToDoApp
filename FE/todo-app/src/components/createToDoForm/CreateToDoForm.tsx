@@ -11,6 +11,7 @@ import { Button } from "../formComponents/Button";
 import { Error } from "../formComponents/Error";
 import { useAppSelector } from "@/store/hooks";
 import { useBodyRef } from "@/hooks/useBodyRef";
+import { TextArea } from "../formComponents/TextArea";
 
 type Props = {
   closeModal: () => void;
@@ -95,7 +96,7 @@ export const CreateToDoForm: FC<Props> = ({ closeModal }) => {
     createPortal(
       <>
         <div className={styles.createToDoContainer}>
-          <div className="bg-gray-800">
+          <div className="bg-gray-800 w-96 ">
             <div className="flex justify-end w-100 p-3">
               <Button onClick={closeModal} buttonType="closeButton" />
             </div>
@@ -124,14 +125,9 @@ export const CreateToDoForm: FC<Props> = ({ closeModal }) => {
                   errorMsg={formState.errors.description?.message}
                 />
 
-                <Input
+                <TextArea
                   name="longDescription"
-                  description="Long Description"
                   placeholder="Long Description"
-                  type="text"
-                />
-                <Error
-                  errorMsg={formState.errors.longDescription?.message}
                 />
 
                 <Input

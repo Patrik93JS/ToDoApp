@@ -3,14 +3,14 @@ import { useFormContext } from "react-hook-form";
 import { Description } from "./Description";
 import { cn } from "@/lib/utils";
 
-type Props = ComponentPropsWithoutRef<"input"> & {
+type Props = ComponentPropsWithoutRef<"textarea"> & {
   name: string;
   description?: string;
   validationValue?: RegExp;
   validationMessage?: string;
 };
 
-export const Input: FC<Props> = ({
+export const TextArea: FC<Props> = ({
   name,
   description,
   validationValue,
@@ -28,9 +28,11 @@ export const Input: FC<Props> = ({
       : undefined;
 
   return (
-    <div className="p-2 flex justify-center items-center flex-col">
+    <div className="p-6 flex justify-center items-center flex-col">
       {description && <Description>{description}</Description>}
-      <input
+      <textarea
+        rows={4}
+        cols={25}
         className={inputStyle}
         {...register(`${name}`, {
           pattern,
